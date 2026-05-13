@@ -60,6 +60,17 @@
     background-size: 60px 60px;
     mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 0%, transparent 100%);
   }
+  .hero-watermark {
+    position: absolute; inset: 0; z-index: 0;
+    background-image: url('https://assets.cdn.filesafe.space/QDvJzVUv2P7sSqyYr4fO/media/69d9f666a4e6aa34cbb47e14.png');
+    background-repeat: no-repeat;
+    background-position: center 55%;
+    background-size: min(720px, 70%) auto;
+    opacity: 0.05;
+    filter: blur(0.5px);
+    pointer-events: none;
+    mask-image: radial-gradient(ellipse 60% 70% at 50% 50%, black 0%, transparent 75%);
+  }
 
   .hero-inner { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
 
@@ -587,6 +598,7 @@
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
+  <div class="hero-watermark"></div>
   <div class="hero-inner">
     <div class="hero-eyebrow">Centro de ayuda</div>
     <h1>¿En qué te echamos<br>una <span class="lime">mano</span>?</h1>
