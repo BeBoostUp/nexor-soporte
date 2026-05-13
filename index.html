@@ -557,9 +557,24 @@
     .channel-card { padding: 1.5rem 1.4rem; gap: 1rem; }
     .channel-icon { width: 44px; height: 44px; }
   }
+
+  /* ────────── EMBED (iframe en GHL) ────────── */
+  body.embed .nav { display: none; }
+  body.embed .hero { padding: 3rem 5% 2.5rem; }
+  body.embed .channels { padding: 3rem 5% 2rem; }
+  body.embed .categories { padding: 2rem 5% 3rem; }
+  body.embed .premium { padding: 3rem 5% 4rem; }
+  body.embed .faq { padding: 2rem 5% 3rem; }
+  body.embed .footer-cta { padding: 3rem 5%; }
 </style>
 </head>
 <body>
+<script>
+  if (window.self !== window.top || /[?&]embed=1/.test(location.search)) {
+    document.documentElement.classList.add('embed');
+    document.addEventListener('DOMContentLoaded', function(){ document.body.classList.add('embed'); });
+  }
+</script>
 
 <!-- NAV -->
 <nav class="nav">
