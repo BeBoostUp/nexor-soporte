@@ -569,6 +569,155 @@
     .channel-icon { width: 44px; height: 44px; }
   }
 
+  /* ────────── CHAT WIDGET ────────── */
+  .chat-fab {
+    position: fixed; bottom: 24px; right: 24px; z-index: 100;
+    width: 60px; height: 60px; border-radius: 50%;
+    background: var(--lime); color: var(--black);
+    border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 28px rgba(181,232,53,0.35), 0 4px 12px rgba(0,0,0,0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .chat-fab:hover { transform: translateY(-2px) scale(1.04); }
+  .chat-fab svg { width: 26px; height: 26px; }
+  .chat-fab .close-icon { display: none; }
+  .chat-fab.open .open-icon { display: none; }
+  .chat-fab.open .close-icon { display: block; }
+
+  .chat-panel {
+    position: fixed; bottom: 100px; right: 24px; z-index: 99;
+    width: 380px; max-width: calc(100vw - 32px);
+    height: 580px; max-height: calc(100vh - 130px);
+    background: var(--dark);
+    border: 1px solid var(--border-lime);
+    border-radius: 18px;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.55);
+    opacity: 0; transform: translateY(16px) scale(0.98);
+    pointer-events: none;
+    transition: opacity 0.22s ease, transform 0.22s ease;
+  }
+  .chat-panel.open {
+    opacity: 1; transform: none; pointer-events: auto;
+  }
+  .chat-header {
+    padding: 1rem 1.2rem;
+    background: linear-gradient(145deg, rgba(181,232,53,0.12), rgba(20,20,20,0.6));
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .chat-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--lime); color: var(--black);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+  .chat-header-info { flex: 1; min-width: 0; }
+  .chat-header-name { font-weight: 600; font-size: 0.95rem; color: var(--white); }
+  .chat-header-status {
+    font-size: 0.75rem; color: var(--lime);
+    display: flex; align-items: center; gap: 0.35rem;
+  }
+  .chat-header-status::before {
+    content: ''; width: 7px; height: 7px; background: var(--lime);
+    border-radius: 50%; box-shadow: 0 0 8px var(--lime);
+    animation: blink 2s infinite;
+  }
+  .chat-messages {
+    flex: 1; overflow-y: auto;
+    padding: 1.2rem;
+    display: flex; flex-direction: column; gap: 0.7rem;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.15) transparent;
+  }
+  .chat-messages::-webkit-scrollbar { width: 6px; }
+  .chat-messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
+  .chat-msg {
+    max-width: 85%;
+    padding: 0.7rem 0.95rem;
+    border-radius: 14px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    animation: msgIn 0.25s ease;
+  }
+  @keyframes msgIn { from { opacity:0; transform: translateY(6px);} to {opacity:1; transform:none;} }
+  .chat-msg.bot {
+    align-self: flex-start;
+    background: rgba(255,255,255,0.06);
+    color: var(--gray-light);
+    border-bottom-left-radius: 4px;
+  }
+  .chat-msg.user {
+    align-self: flex-end;
+    background: var(--lime);
+    color: var(--black);
+    font-weight: 500;
+    border-bottom-right-radius: 4px;
+  }
+  .chat-msg strong { color: var(--white); }
+  .chat-msg.bot strong { color: var(--lime); }
+  .chat-typing {
+    align-self: flex-start;
+    background: rgba(255,255,255,0.06);
+    padding: 0.85rem 1rem; border-radius: 14px; border-bottom-left-radius: 4px;
+    display: flex; gap: 4px;
+  }
+  .chat-typing span {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--gray-mid);
+    animation: typing 1.3s infinite;
+  }
+  .chat-typing span:nth-child(2) { animation-delay: 0.18s; }
+  .chat-typing span:nth-child(3) { animation-delay: 0.36s; }
+  @keyframes typing {
+    0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+    30% { opacity: 1; transform: translateY(-4px); }
+  }
+  .chat-input-wrap {
+    padding: 0.8rem;
+    border-top: 1px solid var(--border);
+    background: var(--card);
+    display: flex; gap: 0.5rem; align-items: flex-end;
+  }
+  .chat-input {
+    flex: 1;
+    background: rgba(8,8,8,0.6);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.7rem 0.9rem;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.92rem;
+    outline: none;
+    resize: none;
+    max-height: 120px;
+    min-height: 42px;
+    transition: border-color 0.2s;
+  }
+  .chat-input:focus { border-color: var(--border-lime); }
+  .chat-input::placeholder { color: var(--gray); }
+  .chat-send {
+    width: 42px; height: 42px;
+    background: var(--lime); color: var(--black);
+    border: none; border-radius: 10px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, transform 0.15s;
+    flex-shrink: 0;
+  }
+  .chat-send:hover:not(:disabled) { background: #c8f53e; }
+  .chat-send:disabled { opacity: 0.5; cursor: not-allowed; }
+  .chat-send svg { width: 18px; height: 18px; }
+  @media (max-width: 500px) {
+    .chat-panel { right: 12px; left: 12px; bottom: 90px; width: auto; }
+    .chat-fab { right: 16px; bottom: 16px; }
+  }
+
   /* ────────── EMBED (iframe en GHL) ────────── */
   body.embed .nav { display: none; }
   body.embed .hero { padding: 3rem 5% 2.5rem; }
@@ -628,16 +777,16 @@
 
   <div class="channels-grid">
 
-    <a href="#" class="channel-card">
+    <a href="#" class="channel-card" id="openChatBtn">
       <div class="channel-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1v-6h3v4zM3 19a2 2 0 0 0 2 2h1v-6H3v4z"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
       </div>
       <div class="channel-body">
         <div class="channel-title-row">
           <div class="channel-title">Soporte por chat</div>
           <div class="channel-eta">Inmediato</div>
         </div>
-        <p class="channel-desc">Abre un ticket desde el chat dentro del CRM. Lo trabajamos a fondo y te respondemos.</p>
+        <p class="channel-desc">Habla ahora con nuestro agente. Te resolvemos la duda en tiempo real.</p>
       </div>
       <svg class="channel-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </a>
@@ -869,7 +1018,149 @@
   </div>
 </section>
 
+<!-- CHAT WIDGET -->
+<button class="chat-fab" id="chatFab" aria-label="Abrir chat de soporte">
+  <svg class="open-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  <svg class="close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+</button>
+
+<div class="chat-panel" id="chatPanel" role="dialog" aria-label="Chat de soporte Nexor">
+  <div class="chat-header">
+    <div class="chat-avatar">N</div>
+    <div class="chat-header-info">
+      <div class="chat-header-name">Soporte Nexor</div>
+      <div class="chat-header-status">En línea</div>
+    </div>
+  </div>
+  <div class="chat-messages" id="chatMessages"></div>
+  <form class="chat-input-wrap" id="chatForm" autocomplete="off">
+    <textarea class="chat-input" id="chatInput" rows="1" placeholder="Escribe tu mensaje..." required></textarea>
+    <button type="submit" class="chat-send" id="chatSend" aria-label="Enviar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
+  </form>
+</div>
+
 <script>
+/* Chat widget */
+(function(){
+  var WEBHOOK = 'https://n8n-cloud-n8n.qfos9e.easypanel.host/webhook/nexorsoporte';
+  var fab = document.getElementById('chatFab');
+  var panel = document.getElementById('chatPanel');
+  var messages = document.getElementById('chatMessages');
+  var form = document.getElementById('chatForm');
+  var input = document.getElementById('chatInput');
+  var sendBtn = document.getElementById('chatSend');
+  var openBtn = document.getElementById('openChatBtn');
+
+  var sessionId = localStorage.getItem('nexor_chat_session');
+  if(!sessionId){
+    sessionId = 'sess_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
+    localStorage.setItem('nexor_chat_session', sessionId);
+  }
+
+  function openChat(){
+    panel.classList.add('open');
+    fab.classList.add('open');
+    if(!messages.children.length){
+      addMessage('bot', '¡Hola! Soy el agente de soporte de Nexor. ¿En qué te echo una mano?');
+    }
+    setTimeout(function(){ input.focus(); }, 200);
+  }
+  function closeChat(){
+    panel.classList.remove('open');
+    fab.classList.remove('open');
+  }
+  function toggleChat(){
+    panel.classList.contains('open') ? closeChat() : openChat();
+  }
+
+  fab.addEventListener('click', toggleChat);
+  if(openBtn){
+    openBtn.addEventListener('click', function(e){
+      e.preventDefault();
+      openChat();
+    });
+  }
+
+  function escapeHtml(s){
+    return s.replace(/[&<>"']/g, function(c){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+    });
+  }
+  function formatBot(text){
+    var s = escapeHtml(text);
+    s = s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    return s.replace(/\n/g, '<br>');
+  }
+  function addMessage(role, text){
+    var div = document.createElement('div');
+    div.className = 'chat-msg ' + role;
+    div.innerHTML = role === 'bot' ? formatBot(text) : escapeHtml(text);
+    messages.appendChild(div);
+    messages.scrollTop = messages.scrollHeight;
+  }
+  function showTyping(){
+    var t = document.createElement('div');
+    t.className = 'chat-typing';
+    t.id = 'chatTyping';
+    t.innerHTML = '<span></span><span></span><span></span>';
+    messages.appendChild(t);
+    messages.scrollTop = messages.scrollHeight;
+  }
+  function hideTyping(){
+    var t = document.getElementById('chatTyping');
+    if(t) t.remove();
+  }
+
+  input.addEventListener('input', function(){
+    input.style.height = 'auto';
+    input.style.height = Math.min(input.scrollHeight, 120) + 'px';
+  });
+  input.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' && !e.shiftKey){
+      e.preventDefault();
+      form.requestSubmit();
+    }
+  });
+
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    var text = input.value.trim();
+    if(!text) return;
+    addMessage('user', text);
+    input.value = '';
+    input.style.height = 'auto';
+    sendBtn.disabled = true;
+    showTyping();
+
+    try {
+      var res = await fetch(WEBHOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          sessionId: sessionId,
+          message: text,
+          source: 'nexor-soporte-web',
+          timestamp: new Date().toISOString()
+        })
+      });
+      var data;
+      var raw = await res.text();
+      try { data = JSON.parse(raw); } catch(_) { data = { output: raw }; }
+      hideTyping();
+      var reply = data.output || data.reply || data.message || data.text || (typeof data === 'string' ? data : 'Recibido. Te respondo en un momento.');
+      addMessage('bot', reply);
+    } catch(err) {
+      hideTyping();
+      addMessage('bot', 'Ups, no he podido conectar con el servidor. Inténtalo otra vez en unos segundos.');
+    } finally {
+      sendBtn.disabled = false;
+      input.focus();
+    }
+  });
+})();
+
 /* Pricing toggle for Nexor Contigo */
 (function(){
   var btnSingle = document.getElementById('btnSingle');
