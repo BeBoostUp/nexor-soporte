@@ -1,4 +1,10 @@
 {
+  "rewrites": [
+    {
+      "source": "/api/chat",
+      "destination": "https://n8n-cloud-n8n.qfos9e.easypanel.host/webhook/nexorsoporte"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
