@@ -572,16 +572,18 @@
   /* ────────── CHAT WIDGET ────────── */
   .chat-fab {
     position: fixed; bottom: 24px; right: 24px; z-index: 100;
-    width: 60px; height: 60px; border-radius: 50%;
-    background: var(--lime); color: var(--black);
-    border: none; cursor: pointer;
+    width: 64px; height: 64px; border-radius: 50%;
+    background: var(--black); color: var(--lime);
+    border: 2px solid var(--lime); cursor: pointer;
+    padding: 0; overflow: hidden;
     display: flex; align-items: center; justify-content: center;
     box-shadow: 0 8px 28px rgba(181,232,53,0.35), 0 4px 12px rgba(0,0,0,0.4);
     transition: transform 0.2s, box-shadow 0.2s;
   }
-  .chat-fab:hover { transform: translateY(-2px) scale(1.04); }
-  .chat-fab svg { width: 26px; height: 26px; }
-  .chat-fab .close-icon { display: none; }
+  .chat-fab:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 12px 32px rgba(181,232,53,0.5), 0 4px 12px rgba(0,0,0,0.4); }
+  .chat-fab .open-icon { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .chat-fab .close-icon { width: 22px; height: 22px; display: none; }
+  .chat-fab.open { background: var(--card); }
   .chat-fab.open .open-icon { display: none; }
   .chat-fab.open .close-icon { display: block; }
 
@@ -609,12 +611,13 @@
     display: flex; align-items: center; gap: 0.8rem;
   }
   .chat-avatar {
-    width: 38px; height: 38px; border-radius: 50%;
-    background: var(--lime); color: var(--black);
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--black);
+    border: 1.5px solid var(--lime);
+    overflow: hidden; flex-shrink: 0;
     display: flex; align-items: center; justify-content: center;
-    font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem;
-    flex-shrink: 0;
   }
+  .chat-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .chat-header-info { flex: 1; min-width: 0; }
   .chat-header-name { font-weight: 600; font-size: 0.95rem; color: var(--white); }
   .chat-header-status {
@@ -1020,13 +1023,13 @@
 
 <!-- CHAT WIDGET -->
 <button class="chat-fab" id="chatFab" aria-label="Abrir chat de soporte">
-  <svg class="open-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  <img class="open-icon" src="/octopus.png" alt="Soporte Nexor">
   <svg class="close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
 </button>
 
 <div class="chat-panel" id="chatPanel" role="dialog" aria-label="Chat de soporte Nexor">
   <div class="chat-header">
-    <div class="chat-avatar">N</div>
+    <div class="chat-avatar"><img src="/octopus.png" alt="Soporte Nexor"></div>
     <div class="chat-header-info">
       <div class="chat-header-name">Soporte Nexor</div>
       <div class="chat-header-status">En línea</div>

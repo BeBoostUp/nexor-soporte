@@ -6,7 +6,7 @@
   window.__nexorChatLoaded = true;
 
   var ENDPOINT = 'https://nexor-soporte.vercel.app/api/chat';
-  var LOGO = 'https://assets.cdn.filesafe.space/QDvJzVUv2P7sSqyYr4fO/media/69d9f666a4e6aa34cbb47e14.png';
+  var LOGO = 'https://nexor-soporte.vercel.app/octopus.png';
 
   // ────── FONT ──────
   if (!document.querySelector('link[data-nexor-font]')) {
@@ -22,17 +22,19 @@
   .nx-chat, .nx-chat * { box-sizing: border-box; }
   .nx-fab {
     position: fixed; bottom: 24px; right: 24px; z-index: 2147483646;
-    width: 60px; height: 60px; border-radius: 50%;
-    background: #b5e835; color: #080808;
-    border: none; cursor: pointer;
+    width: 64px; height: 64px; border-radius: 50%;
+    background: #080808; color: #080808;
+    border: 2px solid #b5e835;
+    cursor: pointer; padding: 0; overflow: hidden;
     display: flex; align-items: center; justify-content: center;
     box-shadow: 0 8px 28px rgba(181,232,53,0.35), 0 4px 12px rgba(0,0,0,0.4);
-    transition: transform 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s;
     font-family: 'DM Sans', sans-serif;
   }
-  .nx-fab:hover { transform: translateY(-2px) scale(1.04); }
-  .nx-fab svg { width: 26px; height: 26px; }
-  .nx-fab .nx-close { display: none; }
+  .nx-fab:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 12px 32px rgba(181,232,53,0.5), 0 4px 12px rgba(0,0,0,0.4); }
+  .nx-fab .nx-open { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .nx-fab .nx-close { width: 22px; height: 22px; display: none; color: #b5e835; }
+  .nx-fab.open { background: #141414; }
   .nx-fab.open .nx-open { display: none; }
   .nx-fab.open .nx-close { display: block; }
   .nx-panel {
@@ -58,11 +60,13 @@
     display: flex; align-items: center; gap: 0.8rem;
   }
   .nx-avatar {
-    width: 38px; height: 38px; border-radius: 50%;
-    background: #b5e835; color: #080808;
+    width: 40px; height: 40px; border-radius: 50%;
+    background: #080808;
+    border: 1.5px solid #b5e835;
+    overflow: hidden; flex-shrink: 0;
     display: flex; align-items: center; justify-content: center;
-    font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; flex-shrink: 0;
   }
+  .nx-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .nx-hname { font-weight: 600; font-size: 0.95rem; color: #fff; }
   .nx-hstatus { font-size: 0.75rem; color: #b5e835; display: flex; align-items: center; gap: 0.35rem; }
   .nx-hstatus::before {
@@ -140,12 +144,12 @@
   wrap.className = 'nx-chat';
   wrap.innerHTML =
     '<button class="nx-fab" id="nxFab" aria-label="Abrir chat de soporte">' +
-      '<svg class="nx-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>' +
+      '<img class="nx-open" src="' + LOGO + '" alt="Soporte Nexor">' +
       '<svg class="nx-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>' +
     '</button>' +
     '<div class="nx-panel" id="nxPanel" role="dialog" aria-label="Chat de soporte Nexor">' +
       '<div class="nx-header">' +
-        '<div class="nx-avatar">N</div>' +
+        '<div class="nx-avatar"><img src="' + LOGO + '" alt="Soporte Nexor"></div>' +
         '<div style="flex:1;min-width:0"><div class="nx-hname">Soporte Nexor</div><div class="nx-hstatus">En línea</div></div>' +
       '</div>' +
       '<div class="nx-messages" id="nxMessages"></div>' +
