@@ -6,7 +6,7 @@
   window.__nexorChatLoaded = true;
 
   var ENDPOINT = 'https://nexor-soporte.vercel.app/api/chat';
-  var LOGO = 'https://nexor-soporte.vercel.app/octopus.png';
+  var LOGO = 'https://nexor-soporte.vercel.app/octopus-v2.png';
 
   // ────── FONT ──────
   if (!document.querySelector('link[data-nexor-font]')) {
