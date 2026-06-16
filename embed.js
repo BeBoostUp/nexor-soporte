@@ -20,24 +20,30 @@
   // ────── STYLES ──────
   var css = `
   .nx-chat, .nx-chat * { box-sizing: border-box; }
+  /* Wrapper fijo en el borde: NO se mueve, así el hover es estable */
+  .nx-fab-zone {
+    position: fixed; bottom: 16px; right: 0; z-index: 2147483646;
+    width: 100px; height: 80px;
+    display: flex; align-items: center; justify-content: flex-end;
+    padding-right: 0;
+  }
   .nx-fab {
-    position: fixed; bottom: 24px; right: 0; z-index: 2147483646;
     width: 64px; height: 64px; border-radius: 50%;
     background: #080808; color: #080808;
     border: 2px solid #b5e835;
     cursor: pointer; padding: 0; overflow: hidden;
     display: flex; align-items: center; justify-content: center;
     box-shadow: 0 8px 28px rgba(181,232,53,0.25), 0 4px 12px rgba(0,0,0,0.35);
-    transform: translateX(60%);
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s;
+    transform: translateX(38px);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s;
     font-family: 'DM Sans', sans-serif;
   }
-  .nx-fab:hover { transform: translateX(-24px) scale(1.04); box-shadow: 0 12px 32px rgba(181,232,53,0.55), 0 4px 12px rgba(0,0,0,0.4); }
-  .nx-fab.open { transform: translateX(-24px); background: #141414; }
-  /* Zona invisible más ancha para "atrapar" el cursor antes de llegar al borde */
-  .nx-fab::before {
-    content: ''; position: absolute; top: -16px; bottom: -16px; left: -24px; right: -16px;
+  .nx-fab-zone:hover .nx-fab,
+  .nx-fab.open {
+    transform: translateX(-16px);
+    box-shadow: 0 12px 32px rgba(181,232,53,0.55), 0 4px 12px rgba(0,0,0,0.4);
   }
+  .nx-fab.open { background: #141414; }
   .nx-fab .nx-open { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
   .nx-fab .nx-close { width: 22px; height: 22px; display: none; color: #b5e835; pointer-events: none; }
   .nx-fab.open .nx-open { display: none; }
@@ -148,10 +154,12 @@
   var wrap = document.createElement('div');
   wrap.className = 'nx-chat';
   wrap.innerHTML =
-    '<button class="nx-fab" id="nxFab" aria-label="Abrir chat de soporte">' +
-      '<img class="nx-open" src="' + LOGO + '" alt="Soporte Nexor">' +
-      '<svg class="nx-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>' +
-    '</button>' +
+    '<div class="nx-fab-zone">' +
+      '<button class="nx-fab" id="nxFab" aria-label="Abrir chat de soporte">' +
+        '<img class="nx-open" src="' + LOGO + '" alt="Soporte Nexor">' +
+        '<svg class="nx-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>' +
+      '</button>' +
+    '</div>' +
     '<div class="nx-panel" id="nxPanel" role="dialog" aria-label="Chat de soporte Nexor">' +
       '<div class="nx-header">' +
         '<div class="nx-avatar"><img src="' + LOGO + '" alt="Soporte Nexor"></div>' +
