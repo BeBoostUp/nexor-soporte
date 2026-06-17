@@ -22,10 +22,10 @@
   .nx-chat, .nx-chat * { box-sizing: border-box; }
   /* Wrapper fijo en el borde: NO se mueve, así el hover es estable */
   .nx-fab-zone {
-    position: fixed; bottom: 16px; right: 0; z-index: 2147483646;
-    width: 100px; height: 80px;
+    position: fixed; bottom: 24px; right: 0; z-index: 2147483646;
+    width: 30px; height: 64px;
     display: flex; align-items: center; justify-content: flex-end;
-    padding-right: 0;
+    overflow: visible;
   }
   .nx-fab {
     width: 64px; height: 64px; border-radius: 50%;
