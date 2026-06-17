@@ -22,8 +22,8 @@
   .nx-chat, .nx-chat * { box-sizing: border-box; }
   /* Wrapper fijo en el borde: NO se mueve, así el hover es estable */
   .nx-fab-zone {
-    position: fixed; bottom: 80px; right: 0; z-index: 2147483646;
-    width: 30px; height: 64px;
+    position: fixed; bottom: 120px; right: 0; z-index: 2147483646;
+    width: 40px; height: 64px;
     display: flex; align-items: center; justify-content: flex-end;
     overflow: visible;
   }
@@ -34,7 +34,7 @@
     cursor: pointer; padding: 0; overflow: hidden;
     display: flex; align-items: center; justify-content: center;
     box-shadow: 0 8px 28px rgba(181,232,53,0.25), 0 4px 12px rgba(0,0,0,0.35);
-    transform: translateX(38px);
+    transform: translateX(28px);
     transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s;
     font-family: 'DM Sans', sans-serif;
   }
